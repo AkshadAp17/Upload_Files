@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #343a40;
+            font-size: 1.5em;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h2 {
+            color: #343a40;
+            margin-top: 30px;
+            font-size: 1.25em;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #e9ecef;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+            word-wrap: break-word;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .no-files {
+            color: #6c757d;
+        }
+        @media (max-width: 600px) {
+            h1, h2 {
+                text-align: center;
+            }
+            form {
+                align-items: center;
+            }
+            input[type="file"] {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            button {
+                width: 100%;
+            }
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload File</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="profileImage" />
+            <button type="submit">Upload</button>
+        </form>
+
+        <h2>Uploaded Files</h2>
+        <% if (files.length > 0) { %>
+            <ul>
+                <% files.forEach(file => { %>
+                    <li>
+                        <a href="/image/<%= file._id %>"><%= file.filename %></a>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p class="no-files">No files uploaded yet.</p>
+        <% } %>
+    </div>
+</body>
+</html>
